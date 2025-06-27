@@ -2,7 +2,7 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import { NextAuthOptions } from "next-auth";
 import GithubProvider from "next-auth/providers/github";
 import { connectToDatabase } from './db';
-import User from '@/models/User';
+import User from '../models/User';
 import bcrypt from "bcryptjs";
 
 export const authOptions : NextAuthOptions ={
@@ -17,7 +17,7 @@ export const authOptions : NextAuthOptions ={
                 email: {label: "Email", type: "text"},
                 password: {label: "Password", type: "password"},
             },
-            async authorize(credentials: { email?: string; password?: string }) {
+            async authorize(credentials) {
                 if(!credentials?.email || !credentials?.password) {
                      throw new Error("missing email or password")
             }
